@@ -12,88 +12,87 @@ $(document).ready(function() {
       this.initEvents();
   },
   initStyling: function() {
-    
       this.renderMap();
+      // this.renderRant();
   },
   initEvents: function() {
-
-    $("form").on("submit", ".submitbtn", this.requestMap); 
- 	var rant = $("#rant").val();
-  	var zip = $("#zip").val();
-  	console.log(rant + zip);
+    $("form").on("submit", ".submitbtn", function() { 
+      e.preventdefault();
+ 	    // var rant = $("#rant").val();
+  	   var address = $("#zip").val();
+       myMap.addMap(zip);
+       myRant.addRant(rant);
+    });
+  },
 
   	render: function (e) {
   		var renderedmap = window.renderedmap = data;
-  		$("#putmaphere").html(), renderedmap)
-	};
+  		$(("#putmaphere").html(), renderedmap);
+      // var renderedrant = window.renderedrant = rant;
+      // $(("#putranthere").html(), renderedrant);
+      console.log(renderedmap);
+	},
 
-    renderMap: function(e) {
+    renderMap: function(map) {
 
       $.ajax({
-      url: "https://maps.google.com/maps/api/js?key=AIzaSyCajq54oRnwkbl-7C-2_-L3LTGUMKcMRjQ&sensor=false" + addressId,
+      url: "https://maps.google.com/maps/api/js?key=AIzaSyCajq54oRnwkbl-7C-2_-L3LTGUMKcMRjQ&sensor=false",
       type: "GET",
       dataType: "jsonp",
       error: function(jqXHR, status, error) {
         alert("you broke the internet");
       },
       success: function(data, dataType, jqXHR) {
-      	var latlng = function(zip){
-		function googleGeocode() {
-  			geocoder = new google.maps.Geocoder();
-  			this.geocode = function(address, callbackFunction) {
-      		geocoder.geocode( { 'address': address}, function(results, status) {
-        		if (status == google.maps.GeocoderStatus.OK) {
-          	var result = {};
-          		result.latitude = results[0].geometry.location.lat();
-          		result.longitude = results[0].geometry.location.lng();
-          		callbackFunction(result);
-        } else {
-          alert("Geocode was not successful for the following reason: " + status);
-          callbackFunction(null);
-        }
-      });
-  };
-}
-
-	}
-    	// var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        var address = $("#zip").val()
+        
+        var map = new google.maps.Map($("#putmaphere").html(), mapOptions);
+        
         var mapOptions = {
             zoom: 8,
-            center: zip,
+            center: latlng,
             mapTypeId: google.maps.MapTypeId.ROADMAP,
             mapTypeControl: false
         };
-    	var map = new google.maps.Map($("#putmaphere").html(), mapOptions);
 		
-		var marker = new google.maps.Marker({
-      		position: latlng, 
-      		map: map,
-      	});
-
-      	var zip = $("#zip").val();
-        	$(geocoder).geocode( { 'address': zip };
- 
-      	console.log("geocoding results");
-        console.log(results);
-  },
-
-    $.ajax({
-      url: "https://maps.google.com/maps/api/js?key=AIzaSyA_FaETrMKtUtLoXzDa2QM_ZkpM5Ah53Ks&sensor=false",
-      type: "POST",
-      data: newMap, 
-      error: function(jqXHR, status, error) {
-        alert("couldn't add post");
-      },
-      success: function(data, dataType, jqXHR) {
-        
-        myMap.addMap(); 
+        // var latlng = new google.maps.LatLng();
+        var latlng = function(address)  {
+        var geocoder = new google.maps.Geocoder();
+          geocoder.geocode({"#zip": address}, function(results, status){
+          if (status == google.maps.GeocoderStatus.OK) {
+          map.setCenter(results[0].geometry.location);
+          var marker = new google.maps.Marker({
+          map: map,
+          position: results[0].geometry.location
+          });
+          } else {
+          alert('Geocode was not successful for the following reason: ' + status);
+          }
+        });
       }
-    });
-    addMap: function(e) {
-    	e.preventdefault();
-    	//create geocoder, map detaills, map reference and container, and marker
-    	
-}}
+    },
+      addMap: function(e) {
+      e.preventDefault();
+
+        var newMapRequest = {
+              address: $(".zip").val()
+        };
+
+        $.ajax({
+          url: "https://maps.google.com/maps/api/js?key=AIzaSyA_FaETrMKtUtLoXzDa2QM_ZkpM5Ah53Ks&sensor=false",
+          type: "POST",
+          data: newMapRequest, 
+          dataType: "json",
+          error: function(jqXHR, status, error) {
+          alert("couldn't add");
+          },
+          success: function(data, dataType, jqXHR) {
+          $(".zip").val("");
+          myMap.addMap();
+          }
+        });  	
+      }
+    }
+    
       // function loadScript() {
       // var script = document.createElement('script');
       // script.type = 'text/javascript';

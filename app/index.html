@@ -9,7 +9,6 @@
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <!-- build:css styles/vendor.css -->
         <!-- bower:css -->
-
         <!-- endbower -->
         <!-- endbuild -->
         <!-- build:css(.tmp) styles/main.css -->
@@ -82,7 +81,7 @@
                             <label for="rantsubmit">What's your rant?</label>
                              <textarea class="form-control" id="rantsubmit" rows="3"></textarea>
                 
-                            <button type="submit" class="btn btn-default pull-right submit">Submit</button>
+                            <button type="submit" class="btn btn-default pull-right submitbtn">Submit</button>
                              </form>           
 
 
@@ -153,15 +152,18 @@
                 </div><!--end rant-->
 
 
-
-
-
-
-
             </div><!--end contain-->
 
         </div><!--end rants-->
-
+        
+        <div class="modal fade" id="editPostModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                     <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="modallabel">Edit Your Rant</h4>
+                    </div>
+             <form id="editRant" action="">
    
 
 
@@ -170,18 +172,6 @@
             <p>A Trinity Creation</p>
 
         </footer><!--end footer-->
-
-
-
-
-
-
-
-
-
-
-
-
 
       <!--   <form class="form-horizontal" role="form">
               <div class="form-group">
@@ -209,7 +199,8 @@
 
         <!-- build:js scripts/vendor.js -->
         <!-- bower:js -->
-        <script src="../bower_components/jquery/dist/jquery.js"></script>
+        <script src="scripts/jquery.js"></script>
+        <script src="scripts/underscore.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
 
@@ -224,6 +215,7 @@
         </script>
 
         <!-- build:js scripts/plugins.js -->
+     
         <script src="../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/affix.js"></script>
         <script src="../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/alert.js"></script>
         <script src="../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/dropdown.js"></script>
@@ -239,6 +231,7 @@
         <!-- endbuild -->
 
         <!-- build:js({app,.tmp}) scripts/main.js -->
+        <script src="scripts/templates.js"></script> 
         <script src="scripts/main.js"></script>
         <!-- endbuild -->
 </body>

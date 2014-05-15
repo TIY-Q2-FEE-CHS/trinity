@@ -17,8 +17,18 @@ var myRant = {
     },
 
   initEvents: function() {
-       $("form").on("click", ".submitbtn", this.addRant);
-       $(".editform").on("click", ".deletebtn", this.removeRant);
+       $("#rantsubmit").on("click", ".submitbtn", this.addRant);
+       $(".rant").on("click", ".removebtn", this.removeRant);
+       $(".rant").on("click", ".editrant", function(e) {
+      e.preventDefault();
+      var rantid = $(this).closest(".rant").data("rantid");
+      myRant.renderRantToEdit(rantid);
+      $("#editRantModal").modal();
+      });
+      $("#editRantModal").on("click", ".submitUpdatedRant", function(e) {
+        var rantid = $("#editRantId").val();
+       myRant.updateRant(rantid);
+      });
     }, 
   render: function ($el, template, data) {
       
@@ -37,7 +47,7 @@ var myRant = {
       },
       success: function(data, dataType, jqXHR) {
         var rants = window.rants = data;
-        myRant.render($("section"), Templates.rant, rants);
+        myRant.render($(".rant"), Templates.rant, rants);
       }
     });
   },
@@ -45,7 +55,7 @@ var myRant = {
     e.preventDefault();
         var newRant = {
           date: new Date(),
-          rant: $(".rantsgohere").val(),
+          content: $("#rantsubmit").val(),
           zip: new ZipCode()
         };
       $ajax({
@@ -57,15 +67,14 @@ var myRant = {
           alert("no no no, i don't add rant");
         },
         success: function(data, dataType, jqXHR) {
-          $(".rantsgohere").val();
-          $(".zip").val();
+          $("#rantsubmit").val("");
           myRant.renderRant();
         }
       });
     },
     removeRant: function(rant){
       e.preventDefault();
-      var $thisRant = $(this).closest("rantelement")
+      var $thisRant = $(this).closest(".rant")
       var rantid = $thisRant.data("rantid");
 
     $.ajax({
@@ -79,13 +88,12 @@ var myRant = {
       }
     });
   },
-    updateRant: function(postId) {
+    updateRant: function(rantid) {
      console.log("sworking");
      var id = rantid;
         var editRant = {
               date: new Date(),
-              rant: $(".rantsgohere").val(),
-              zip: new ZipCode
+              content: $("#editrantsubmit").val()
         };
 
     $.ajax({
@@ -96,7 +104,8 @@ var myRant = {
         alert("nah dawg"+ error);
       },
       success: function(data, dataType, jqXHR) {
-        myBlog.renderRant(); 
+        $("#editRantModal").modal("hide");
+        myRant.renderRant(); 
       }
     });
   },
@@ -110,13 +119,13 @@ var myRant = {
         alert("broke ass render edit");
       },
       success: function(data, dataType, jqXHR) {
-        var rants = window.rants = data; // have to make global for underscore to work
-        myBlog.render($("#editPostForm"),Templates.editRant, rants);
+        var rants = window.rants = data; 
+        myRant.render($(".editRant"),Templates.editRant, rants);
       }
     });
     }
   }
-}
+
  //  var myMap = {
  //  init: function() {
  //      this.initStyling();

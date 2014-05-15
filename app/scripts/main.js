@@ -17,14 +17,11 @@ var myRant = {
     },
 
   initEvents: function() {
-       $("form").on("submit", ".submitbtn", function() { 
-        e.preventdefault();
-        myRant.addRant();
-      });
+       $("form").on("submit", this.addRant);
     }, 
   render: function(e) {
 
-    var rants = $(".rantsgohere").html();
+    $(".rantsgohere").html();
     console.log(rants);
     },
 
@@ -38,7 +35,10 @@ var myRant = {
       },
       success: function(data, dataType, jqXHR) {
         var rants = window.rants = data; // have to make global for underscore to work
-        myRant.render($(".rantsgohere"), rants);
+        myRant.render("<% _.each(rants, function(rant, index , list) { %>",
+
+           "<p class=\"rantsgohere\" data-rantId=\"<%= rant. %>\">",
+        } );
       }
     });
   },

@@ -9,7 +9,7 @@ $(document).ready(function() {
 var myRant = {
   init: function() {
       this.initStyling();
-      this.initEvents():
+      this.initEvents();
     },
 
   initStyling: function() {
@@ -20,12 +20,12 @@ var myRant = {
        $("form").on("submit", ".submitbtn", function() { 
         e.preventdefault();
         myRant.addRant();
-    },
-
+      });
+    }, 
   render: function(e) {
-      var renderedmap = window.renderedmap = data;
-      $(("#putmaphere").html(), renderedmap);
-      console.log(renderedmap);
+
+    var rants = $(".rantsgohere").html();
+    console.log(rants);
     },
 
   renderRant: function(e) {
@@ -38,7 +38,7 @@ var myRant = {
       },
       success: function(data, dataType, jqXHR) {
         var rants = window.rants = data; // have to make global for underscore to work
-        myRant.render($("rantsgohere").html(),rants);
+        myRant.render($(".rantsgohere"), rants);
       }
     });
   },

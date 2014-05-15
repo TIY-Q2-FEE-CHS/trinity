@@ -17,13 +17,15 @@ var myRant = {
     },
 
   initEvents: function() {
-       $("form").on("submit", this.addRant);
+       $("form").on("click", ".submitbtn", this.addRant);
+       $(".editform").on("click", ".deletebtn", this.removeRant);
     }, 
-  render: function(e) {
+  render: function ($el, template, data) {
+      
+      var tmpl = _.template(template, data);
 
-    $(".rantsgohere").html();
-    console.log(rants);
-    },
+      $el.html(tmpl);
+  },
 
   renderRant: function(e) {
       $.ajax({
@@ -31,22 +33,20 @@ var myRant = {
       type: "GET",
       dataType: "json",
       error: function(jqXHR, status, error) {
-        alert("you broke the internet");
+        alert("check yo self");
       },
       success: function(data, dataType, jqXHR) {
-        var rants = window.rants = data; // have to make global for underscore to work
-        myRant.render("<% _.each(rants, function(rant, index , list) { %>",
-
-           "<p class=\"rantsgohere\" data-rantId=\"<%= rant. %>\">",
-        } );
+        var rants = window.rants = data;
+        myRant.render($("section"), Templates.rant, rants);
       }
     });
   },
   addRant: function(rant){
     e.preventDefault();
         var newRant = {
+          date: new Date(),
           rant: $(".rantsgohere").val(),
-          zip: $(".zip").val()
+          zip: new ZipCode()
         };
       $ajax({
         url: "http://tiy-fee-rest.herokuapp.com/collections/trinity",
@@ -63,7 +63,60 @@ var myRant = {
         }
       });
     },
+    removeRant: function(rant){
+      e.preventDefault();
+      var $thisRant = $(this).closest("rantelement")
+      var rantid = $thisRant.data("rantid");
+
+    $.ajax({
+      url: "http://tiy-fee-rest.herokuapp.com/collections/trinity/" + rantid,
+      type: "DELETE",
+      error: function(jqXHR, status, error) {
+        alert("no no no, no remove for you");
+      }, 
+      success: function(data) {
+         myRant.renderRant();  
+      }
+    });
+  },
+    updateRant: function(postId) {
+     console.log("sworking");
+     var id = rantid;
+        var editRant = {
+              date: new Date(),
+              rant: $(".rantsgohere").val(),
+              zip: new ZipCode
+        };
+
+    $.ajax({
+      url: "http://tiy-fee-rest.herokuapp.com/collections/trinity/" + id,
+      type: "PUT",
+      data: editRant, 
+      error: function(jqXHR, status, error) {
+        alert("nah dawg"+ error);
+      },
+      success: function(data, dataType, jqXHR) {
+        myBlog.renderRant(); 
+      }
+    });
+  },
+  renderRantToEdit: function(rantid) {
+
+    $.ajax({
+      url: "http://tiy-fee-rest.herokuapp.com/collections/myRant/" + rantid,
+      type: "GET",
+      dataType: "json",
+      error: function(jqXHR, status, error) {
+        alert("broke ass render edit");
+      },
+      success: function(data, dataType, jqXHR) {
+        var rants = window.rants = data; // have to make global for underscore to work
+        myBlog.render($("#editPostForm"),Templates.editRant, rants);
+      }
+    });
+    }
   }
+}
  //  var myMap = {
  //  init: function() {
  //      this.initStyling();

@@ -19,15 +19,38 @@ $(document).ready(function() {
 
     $("form").on("submit", ".submitbtn", this.requestMap); 
  	var rant = $("#rant").val();
-  	var zip = $("#zip").val();
+  	var zip = $("#zip").val() = address;
   	console.log(rant + zip);
+
+    if (zip == "")
+      {
+        alert("The input box was blank.");
+      }
+     
+      var g = new GoogleGeocode();
+      var address = userinput;
+
+      g.geocode(address, function(data) {
+        if(data != null) {
+          olat = data.latitude;
+          olng = data.longitude;
+         
+          $('#geocode-result').append("Latitude: " + olat + "<br />" + "Longitude: " + olng + "<br /><br />");
+
+        } else {
+          //Unable to geocode
+          alert('ERROR! Unable to geocode address');
+        }
+      });
+},
+
 
   	render: function (e) {
   		var renderedmap = window.renderedmap = data;
-  		$("#putmaphere").html(), renderedmap)
-	};
+  		$(("#putmaphere").html(), renderedmap)
+	},
 
-    renderMap: function(e) {
+    renderMap: function(map) {
 
       $.ajax({
       url: "https://maps.google.com/maps/api/js?key=AIzaSyCajq54oRnwkbl-7C-2_-L3LTGUMKcMRjQ&sensor=false" + addressId,
@@ -37,7 +60,22 @@ $(document).ready(function() {
         alert("you broke the internet");
       },
       success: function(data, dataType, jqXHR) {
-      	var latlng = function(zip){
+
+    	// var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        var mapOptions = {
+            zoom: 8,
+            center: zip,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            mapTypeControl: false
+        };
+    	var map = new google.maps.Map($("#putmaphere").html(), mapOptions);
+		
+		var marker = new google.maps.Marker({
+      		position: latlng, 
+      		map: map,
+      	});
+		
+		var latlng = function(address){
 		function googleGeocode() {
   			geocoder = new google.maps.Geocoder();
   			this.geocode = function(address, callbackFunction) {
@@ -54,27 +92,33 @@ $(document).ready(function() {
       });
   };
 }
-
 	}
-    	// var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-        var mapOptions = {
-            zoom: 8,
-            center: zip,
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
-            mapTypeControl: false
-        };
-    	var map = new google.maps.Map($("#putmaphere").html(), mapOptions);
-		
-		var marker = new google.maps.Marker({
-      		position: latlng, 
-      		map: map,
-      	});
-
-      	var zip = $("#zip").val();
-        	$(geocoder).geocode( { 'address': zip };
+      	var zip = $("#zip").val() = address;
+        	$(geocoder).geocode( { 'address': address });
  
       	console.log("geocoding results");
         console.log(results);
+      
+  	console.log(rant + zip);
+
+    if (zip == "")
+      {
+        alert("The input box was blank.");
+      }
+     
+      var g = new GoogleGeocode();
+      var address = userinput;
+
+      g.geocode(address, function(data) {
+        if(data != null) {
+          olat = data.latitude;
+          olng = data.longitude;
+         
+          $('#geocode-result').append("Latitude: " + olat + "<br />" + "Longitude: " + olng + "<br /><br />");
+
+        } else {
+          //Unable to geocode
+          alert('ERROR! Unable to geocode address');
   },
 
     $.ajax({

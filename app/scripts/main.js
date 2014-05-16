@@ -17,16 +17,16 @@ var myRant = {
     },
 
   initEvents: function() {
-       $("#rantsubmit").on("click", ".submitbtn", this.addRant);
+       $(".col-md-6").on("click", ".submitbtn", this.addRant);
        $(".rant").on("click", ".removebtn", this.removeRant);
        $(".rant").on("click", ".editrant", function(e) {
-      e.preventDefault();
-      var rantid = $(this).closest(".rant").data("rantid");
-      myRant.renderRantToEdit(rantid);
+        e.preventDefault();
+        var rantid = $(this).closest(".rantshere").data("rantid");
+        myRant.renderRantToEdit(rantid);
       $("#editRantModal").modal();
       });
       $("#editRantModal").on("click", ".submitUpdatedRant", function(e) {
-        var rantid = $("#editRantId").val();
+        var rantid = $("#editrantid").val();
        myRant.updateRant(rantid);
       });
     }, 
@@ -47,27 +47,29 @@ var myRant = {
       },
       success: function(data, dataType, jqXHR) {
         var rants = window.rants = data;
-        myRant.render($(".rant"), Templates.rant, rants);
+        myRant.render($(".rantshere"), Templates.rant, rants);
+     //within the myRant obj, we'll render div class "rant" 
+     //full of rants through the template.rant
       }
     });
   },
-  addRant: function(rant){
+  addRant: function(){
     e.preventDefault();
+    console.log("damnit");
         var newRant = {
-          date: new Date(),
-          content: $("#rantsubmit").val(),
-          zip: new ZipCode()
+          content: $("#rantsubmitform").val(),
+          date: new Date()
         };
-      $ajax({
+
+      $.ajax({
         url: "http://tiy-fee-rest.herokuapp.com/collections/trinity",
         type: "POST",
         data: newRant, 
-        dataType: "json",
         error: function(jqXHR, status, error) {
           alert("no no no, i don't add rant");
         },
         success: function(data, dataType, jqXHR) {
-          $("#rantsubmit").val("");
+          $("#rantsubmitform").val("");
           myRant.renderRant();
         }
       });
@@ -89,7 +91,6 @@ var myRant = {
     });
   },
     updateRant: function(rantid) {
-     console.log("sworking");
      var id = rantid;
         var editRant = {
               date: new Date(),
@@ -123,9 +124,9 @@ var myRant = {
         myRant.render($(".editRant"),Templates.editRant, rants);
       }
     });
-    }
-  }
+    },
 
+};
  //  var myMap = {
  //  init: function() {
  //      this.initStyling();

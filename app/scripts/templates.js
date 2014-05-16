@@ -12,13 +12,13 @@ Templates.editRant = [
 	"<div class=\"modal-body\">",
       "<div class=\"form-group\">",
         "<label for=\"editrantlabel\">Edit Rant</label>",
-        "<textarea id=\"editranttext\" class=\"form-control editranttext\"><%= rant.content %></textarea>",
+        "<textarea id=\"editranttext\" class=\"form-control editranttext\"><%= rants.content %></textarea>",
       "</div>",
-      "<div class=\"modal-footer\" data-editrantid=\"<%= rant._id %>\">",
-  	   "<input id=\"editrantid\" type=\"hidden\" value=\"<%= rant._id %>\">",
-        "<button type=\"button\" class=\"btn btn-default deleterant data-dismiss=\"modal\">Close</button>",
-        "<button type=\"button\" class=\"btn btn-primary submitupdatedrant\">Save & Post</button>",
-      "</div>",
-  "</div>"
+  "</div>",    
+      "<div class=\"modal-footer\" data-editrantid=\"<%= rants._id %>\">",
+  	   "<input id=\"editrantid\" type=\"hidden\" value=\"<%= rants._id %>\">",
+        "<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>",
+        "<button type=\"button\" class=\"btn btn-primary submiteditrant\">Save & Post</button>",
+      "</div>"
 ].join("\n");
 

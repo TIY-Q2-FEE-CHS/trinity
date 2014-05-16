@@ -21,13 +21,14 @@ var myRant = {
        $("div").on("click", ".removerant", this.removeRant);
        $("div").on("click", ".editrant", function(e) {
         e.preventDefault();
-        var rantid = $(this).closest(".rantshere").data("rantid");
+        var rantid = $(this).closest(".rant").data("rantid");
         myRant.renderRantToEdit(rantid);
       $("#editRantModal").modal();
       });
-      $("#editRantModal").on("click", ".submitUpdatedRant", function(e) {
-        var rantid = $("#editrantid").val();
+      $("#editRantModal").on("click", ".submiteditrant", function(e) {
+      var rantid = $("#editrantid").val();
        myRant.updateRant(rantid);
+       console.log(rantid);
       });
     }, 
   render: function ($el, template, data) {
@@ -107,6 +108,7 @@ var myRant = {
       success: function(data, dataType, jqXHR) {
         $("#editRantModal").modal("hide");
         myRant.renderRant(); 
+        console.log("modal works");
       }
     });
   },
@@ -121,10 +123,10 @@ var myRant = {
       },
       success: function(data, dataType, jqXHR) {
         var rants = window.rants = data; 
-        myRant.render($(".editRantForm"),Templates.editRant, rants);
+        myRant.render($("#editRantForm"),Templates.editRant, rants);
       }
     });
-    },
+    }
 
 };
  //  var myMap = {

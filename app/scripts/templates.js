@@ -3,6 +3,9 @@ Templates.postRant = [
 	 "<% _.each(rants, function(rant, index, list) { %>",
         "<div class=\"rant\" data-rantid=\"<%= rant._id %>\">",
           "<p>\"<%= rant.content %>\"</p>",
+          "<p>\"<%= rant.zip %>\"</p>",
+          "<p>\"<%= rant.lat %>\"</p>",
+          "<p>\"<%= rant.lng %>\"</p>",
           "<span class=\"glyphicon glyphicon-pencil editrant\"></span><span class=\"glyphicon glyphicon-remove removerant\"></span>",
         "</div>",
         "<% }); %>"
@@ -17,6 +20,8 @@ Templates.editRant = [
   "</div>",    
       "<div class=\"modal-footer\" data-editrantid=\"<%= rants._id %>\">",
   	   "<input id=\"editrantid\" type=\"hidden\" value=\"<%= rants._id %>\">",
+       "<input id=\"editrantid\" type=\"hidden\" value=\"<%= rants.lat %>\">",
+       "<input id=\"editrantid\" type=\"hidden\" value=\"<%= rants.lng %>\">",
         "<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>",
         "<button type=\"button\" class=\"btn btn-primary submiteditrant\">Save & Post</button>",
       "</div>"

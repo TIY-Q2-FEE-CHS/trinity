@@ -78,8 +78,8 @@
                                          
                              <form role="form" id="rantsubmitform">
                  
-                            <label for="rantsubmitform">What's your rant?</label>
-                             <textarea class="form-control" id="rantsubmitform" rows="3"></textarea>
+                            <label for="rantsubmitlabel">What's your rant?</label>
+                             <textarea class="form-control" id="rantsubmittext" rows="3"></textarea>
                 
                             <button type="submit" class="btn btn-default pull-right submitbtn">Submit</button>
                              </form>           
@@ -109,7 +109,7 @@
                 <div class="rant">
                     
                     <h2>37918</h2>
-                    <p class="rantcontent">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus, ipsum, nulla vitae molestiae temporibus amet ut unde doloremque quam dolor deleniti quisquam in est nam debitis omnis eos sed ipsa.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus, ipsum, nulla vitae molestiae temporibus amet ut unde doloremque quam dolor deleniti quisquam in est nam debitis omnis eos sed ipsa.</p>
                     
 
 
@@ -120,16 +120,18 @@
 
         </div><!--end rants-->
         
-        <div class="modal fade" id="editPostModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal fade" id="editRantModal" tabindex="-1" role="dialog" aria-labelledby="modallabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                      <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="modallabel">Edit Your Rant</h4>
-                    </div>
-             <form id="editRant" action="">
-   
-
+                        <h4 class="modal-title" id="modallabel">Edit Your Rant</h4>
+                     </div>
+                        <form id="editRantForm" action="">
+                        </form>
+                </div>
+            </div>
+        </div>
 
         <footer>
             

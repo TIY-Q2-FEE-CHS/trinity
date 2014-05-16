@@ -58,6 +58,7 @@ var myRant = {
       e.preventDefault();
         var newRant = {
           content: $("#rantsubmittext").val(),
+          zip: $("#rantsubmitzip").val(),
           date: new Date()
         };
 
@@ -70,6 +71,7 @@ var myRant = {
         },
         success: function(data, dataType, jqXHR) {
           $("#rantsubmittext").val("");
+          $("#rantsubmitzip").val("");
           myRant.renderRant();
             console.log("add and render success!");
         }

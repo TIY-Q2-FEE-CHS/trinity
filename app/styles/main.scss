@@ -133,6 +133,10 @@ $icon-font-path: "/bower_components/bootstrap-sass-official/vendor/assets/fonts/
 	padding: 10px 0 0 0;
 }
 
+.col-md-5 {
+	display: inline;
+}
+
 
 .intro{
 	width: 100%;
@@ -157,7 +161,7 @@ form#rantsubmit{
 	margin: 45px 0 0 30px;
 }
 
-form#rantsubmit label{
+form#rantsubmitlabel {
 		padding: 0 0 30px 0;
 	font-family: 'Helvetica';
 	text-transform: uppercase;
@@ -169,14 +173,14 @@ form#rantsubmit button.submit{
 }
 
 
-.rants{
+.rantshere{
 	width: 100%;
 	min-height: 500px;
 	background-color: #333333;
 	padding: 0 0 30px 0;
 }
 
-.rants h1{
+.rantshere h1{
 	padding: 50px 0 50px 0;
 	text-align: center;
 	color: white;
@@ -187,6 +191,7 @@ form#rantsubmit button.submit{
 .rant{
 	width: 250px;
 	min-height: 250px;
+	border-radius: 50px;
 	background-color: tomato;
 	display: inline-block;
 	margin: 10px;

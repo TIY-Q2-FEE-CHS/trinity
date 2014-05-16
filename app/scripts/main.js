@@ -17,17 +17,18 @@ var myRant = {
     },
 
   initEvents: function() {
-       $(".col-md-6").on("click", ".submitbtn", this.addRant);
-       $(".rant").on("click", ".removebtn", this.removeRant);
-       $(".rant").on("click", ".editrant", function(e) {
+       $("#rantsubmitform").on("submit", this.addRant);
+       $("div").on("click", ".removerant", this.removeRant);
+       $("div").on("click", ".editrant", function(e) {
         e.preventDefault();
-        var rantid = $(this).closest(".rantshere").data("rantid");
+        var rantid = $(this).closest(".rant").data("rantid");
         myRant.renderRantToEdit(rantid);
       $("#editRantModal").modal();
       });
-      $("#editRantModal").on("click", ".submitUpdatedRant", function(e) {
-        var rantid = $("#editrantid").val();
+      $("#editRantModal").on("click", ".submiteditrant", function(e) {
+      var rantid = $("#editrantid").val();
        myRant.updateRant(rantid);
+       console.log(rantid);
       });
     }, 
   render: function ($el, template, data) {
@@ -37,7 +38,7 @@ var myRant = {
       $el.html(tmpl);
   },
 
-  renderRant: function(e) {
+  renderRant: function() {
       $.ajax({
       url: "http://tiy-fee-rest.herokuapp.com/collections/trinity",
       type: "GET",
@@ -47,34 +48,34 @@ var myRant = {
       },
       success: function(data, dataType, jqXHR) {
         var rants = window.rants = data;
-        myRant.render($(".rantshere"), Templates.rant, rants);
+        myRant.render($(".rantshere"), Templates.postRant, rants);
      //within the myRant obj, we'll render div class "rant" 
      //full of rants through the template.rant
       }
     });
   },
-  addRant: function(){
-    e.preventDefault();
-    console.log("damnit");
+  addRant: function(e){
+      e.preventDefault();
         var newRant = {
-          content: $("#rantsubmitform").val(),
+          content: $("#rantsubmittext").val(),
           date: new Date()
         };
 
       $.ajax({
         url: "http://tiy-fee-rest.herokuapp.com/collections/trinity",
         type: "POST",
-        data: newRant, 
+        data: newRant,
         error: function(jqXHR, status, error) {
           alert("no no no, i don't add rant");
         },
         success: function(data, dataType, jqXHR) {
-          $("#rantsubmitform").val("");
+          $("#rantsubmittext").val("");
           myRant.renderRant();
+            console.log("add and render success!");
         }
       });
     },
-    removeRant: function(rant){
+    removeRant: function(e){
       e.preventDefault();
       var $thisRant = $(this).closest(".rant")
       var rantid = $thisRant.data("rantid");
@@ -94,7 +95,7 @@ var myRant = {
      var id = rantid;
         var editRant = {
               date: new Date(),
-              content: $("#editrantsubmit").val()
+              content: $("#editranttext").val()
         };
 
     $.ajax({
@@ -107,13 +108,14 @@ var myRant = {
       success: function(data, dataType, jqXHR) {
         $("#editRantModal").modal("hide");
         myRant.renderRant(); 
+        console.log("modal works");
       }
     });
   },
   renderRantToEdit: function(rantid) {
 
     $.ajax({
-      url: "http://tiy-fee-rest.herokuapp.com/collections/myRant/" + rantid,
+      url: "http://tiy-fee-rest.herokuapp.com/collections/trinity/" + rantid,
       type: "GET",
       dataType: "json",
       error: function(jqXHR, status, error) {
@@ -121,10 +123,10 @@ var myRant = {
       },
       success: function(data, dataType, jqXHR) {
         var rants = window.rants = data; 
-        myRant.render($(".editRant"),Templates.editRant, rants);
+        myRant.render($("#editRantForm"),Templates.editRant, rants);
       }
     });
-    },
+    }
 
 };
  //  var myMap = {

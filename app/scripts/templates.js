@@ -2,11 +2,13 @@ Templates = {};
 Templates.postRant = [
 	 "<% _.each(rants, function(rant, index, list) { %>",
         "<div class=\"rant\" data-rantid=\"<%= rant._id %>\">",
-          "<p>\"<%= rant.content %>\"</p>",
+         "<span class=\"glyphicon glyphicon-pencil editrant\"></span><span class=\"glyphicon glyphicon-remove removerant\"></span>",
           "<p>\"<%= rant.zip %>\"</p>",
-          "<p>\"<%= rant.lat %>\"</p>",
-          "<p>\"<%= rant.lng %>\"</p>",
-          "<span class=\"glyphicon glyphicon-pencil editrant\"></span><span class=\"glyphicon glyphicon-remove removerant\"></span>",
+        
+          "<p>\"<%= rant.content %>\"</p>",
+          // "<p>\"<%= rant.lat %>\"</p>",
+          // "<p>\"<%= rant.lng %>\"</p>",
+         
         "</div>",
         "<% }); %>"
 ].join("\n");

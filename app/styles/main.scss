@@ -1,4 +1,24 @@
+<<<<<<< Updated upstream
 $icon-font-path: "/bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
+=======
+html {
+
+	height: 100% 
+}
+      
+ body {
+
+ 	height: 100%; margin: 0; padding: 0
+}
+      
+ #map-canvas {
+
+ 	height: 100%
+
+}
+
+// $icon-font-path: "/bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
+>>>>>>> Stashed changes
 
 // bower:scss
 @import "../../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap.scss";

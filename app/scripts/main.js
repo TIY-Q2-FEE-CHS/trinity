@@ -48,7 +48,7 @@ var myRant = {
       },
       success: function(data, dataType, jqXHR) {
         var rants = window.rants = data;
-        myRant.html($(".rantscontain"), Templates.postRant, rants);
+        myRant.render($(".rantscontain"), Templates.postRant, rants);
      //within the myRant obj, we'll render div class "rant" 
      //full of rants through the template.rant
       }
@@ -129,7 +129,6 @@ var myRant = {
       }
     });
     }
-
 };
  //  var myMap = {
  //  init: function() {

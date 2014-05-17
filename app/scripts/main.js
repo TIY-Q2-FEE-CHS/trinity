@@ -48,7 +48,8 @@ var myRant = {
       },
       success: function(data, dataType, jqXHR) {
         var rants = window.rants = data;
-       myRant.render($(".rantscontain"), Templates.postRant, rants);
+        myRant.render($(".rantscontain"), Templates.postRant, rants);
+
      //within the myRant obj, we'll render div class "rant" 
      //full of rants through the template.rant
       }
@@ -132,8 +133,11 @@ var myRant = {
       }
     });
     }
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> eb1e1090b0108c7b2dc531e65dcd2378b867f680
 };
  //  var myMap = {
  //  init: function() {

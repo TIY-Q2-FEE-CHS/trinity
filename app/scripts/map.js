@@ -22,8 +22,7 @@ function initialize() {
             $.ajax({ 
                 'async': false, 
                 'global': false, 
-                'url': "http://tiy-fee-rest.herokuapp.com/collections/trinity
-", 
+                'url': "http://tiy-fee-rest.herokuapp.com/collections/trinity", 
                 'dataType': "json", 
                 'success': function (data) {
                      json = data; 
@@ -84,5 +83,22 @@ function initialize() {
           });
         })(marker, data);
     }
+
+
+     codeAddress: function() {
+      var address = document.getElementById('zippick').value;
+      geocoder.geocode( { 'address': address}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          map.setCenter(results[0].geometry.location);
+          var marker = new google.maps.Marker({
+              map: map,
+              position: results[0].geometry.location
+          });
+        } else {
+          alert('Geocode was not successful for the following reason: ' + status);
+        }
+      });
+
+      google.maps.event.addDomListener(window, 'load', initialize);
 
    google.maps.event.addDomListener(window, 'load', initialize);

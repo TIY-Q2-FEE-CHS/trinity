@@ -23,8 +23,70 @@
 
         <!-- endbuild -->
 
+        <script>
+
+            var map;
+
+
+            function initialize() {
+              var myLatlng = new google.maps.LatLng(32.7833, -79.9333);
+              var mapOptions = {
+                zoom: 8,
+                center: myLatlng
+              }
+              var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+
+            }
+
+                          google.maps.event.addDomListener(window, 'load', initialize);
+
+          </script>
+
  
-     
+         <script>
+                function geolocateUser() {
+                           console.log("testing");
+
+                    // If the browser supports the Geolocation API
+                    if (navigator.geolocation)
+                    {
+                      var positionOptions = {
+                        enableHighAccuracy: true,
+                        timeout: 10 * 1000 // 10 seconds
+                      };
+                      navigator.geolocation.getCurrentPosition(geolocationSuccess, geolocationError, positionOptions);
+                    }
+                    else
+                      document.getElementById("error").innerHTML += "Your browser doesn't support the Geolocation API";
+                  }
+
+                  
+             
+                  function geolocationSuccess(position) {
+                    var userLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                    // Write the formatted address
+             
+                    var myOptions = {
+                      zoom : 12,
+                      center : userLatLng,
+                      mapTypeId : google.maps.MapTypeId.ROADMAP
+                    };
+                    // Draw the map
+                    var mapObject = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
+                    // Place the marker
+                    new google.maps.Marker({
+                      map: mapObject,
+                      position: userLatLng
+                    });
+                    // Draw a circle around the user position to have an idea of the current localization accuracy
+                  
+                  }
+             
+                  function geolocationError(positionError) {
+                    document.getElementById("error").innerHTML += "Error: " + positionError.message + "<br />";
+                  }
+        </script>
 
     </head>
     <body>
@@ -76,7 +138,7 @@
 
                  <div id="map-canvas"></div>
 
-                    
+                  
 
                         </div><!--end col-->
                         
@@ -89,27 +151,7 @@
                              <label for="rantsubmitlabel">What's your rant?</label>
                              <textarea class="form-control" id="rantsubmittext" rows="3"></textarea>
                           
-                            <select class="form-control" id="zippick">
-
-                                      <option>29455</option>
-                                      <option>29439</option>
-                                      <option>29412</option>
-                                      <option>29482</option>
-                                      <option>29401</option>
-                                      <option>29424</option>
-                                      <option>29403</option>
-                                      <option>29409</option>
-                                      <option>29407</option>
-                                      <option>29464</option>
-                                      <option>29485</option>
-                                      <option>29414</option>
-                                      <option>29466</option>
-                                      <option>29451</option>
-                                      <option>29429</option>
-                                      <option>29492</option>
-                                      <option>29410</option>
-                                      <option>29406</option>
-                            </select>
+                          
                             
                             <button type="submit" class="btn btn-default pull-right submitbtn" id="rantSubmit">Submit</button>
                              </form>           
@@ -226,7 +268,7 @@
 
         <!-- build:js({app,.tmp}) scripts/main.js -->
         <script src="scripts/templates.js"></script> 
-        <script src="scripts/doesthiswork.js"></script> 
+        <script src="scripts/main.js"></script> 
 
         <!-- endbuild -->
 </body>

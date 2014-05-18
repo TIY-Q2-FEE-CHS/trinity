@@ -1,4 +1,23 @@
-console.log("hi");
+// var map;
+
+
+// function initialize() {
+//   var myLatlng = new google.maps.LatLng(32.7833, -79.9333);
+//   var mapOptions = {
+//     zoom: 8,
+//     center: myLatlng
+//   }
+//   var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+
+  
+// }
+
+// google.maps.event.addDomListener(window, 'load', initialize);
+
+
+// console.log("hi");
+// var map;
 // function initialize() {
 //   var mapOptions = {
 //     zoom: 8,
@@ -10,11 +29,65 @@ console.log("hi");
 
 // google.maps.event.addDomListener(window, 'load', initialize);
 
-// $( "#rantSubmit" ).submit(function() {
+$( "#rantsubmitform" ).submit(function() {
 
 
-// });
+    geolocateUser();
+});
 
+//       console.log("forkhubz");
+
+//       function getLocation() {
+//   if (navigator.geolocation) {
+//     navigator.geolocation.getCurrentPosition(showPosition);
+//   } else {
+//     alert("Geolocation is not supported by this browser.");
+//   }
+// }
+// function showPosition(position) {
+//   var lat = position.coords.latitude;
+//   var lng = position.coords.longitude;
+//   map.setCenter(new google.maps.LatLng(lat, lng));
+
+//   var marker = new google.maps.Marker({
+//       position: (lat, lng),
+//       map: map,
+//       title: 'Hello World!'
+//   });
+// }
+
+       
+// google.maps.event.addDomListener(window, 'load', initialize);
+
+
+
+//     function getLocation() {
+//   if (navigator.geolocation) {
+//     navigator.geolocation.getCurrentPosition(showPosition);
+
+//   } else {
+//     alert("Geolocation is not supported by this browser.");
+//   }
+// }
+// function showPosition(position) {
+//   var lat = position.coords.latitude;
+//   var lng = position.coords.longitude;
+//   map.setCenter(new google.maps.LatLng(lat, lng));
+// }
+
+
+
+
+
+
+// ("$addmarker").click(function(){
+//     var marker = new google.maps.Marker({
+//         position: new google.maps.LatLng(23.72, 72.100),
+//         title: 'Marker',
+//         map: map,
+//         draggable: true
+//     });
+//  })
 
 
 // function setMarkers(center, radius, map) {
@@ -68,44 +141,27 @@ console.log("hi");
 
 //      
 
-var initialLocation;
-var siberia = new google.maps.LatLng(60, 105);
-var newyork = new google.maps.LatLng(40.69847032728747, -73.9514422416687);
-var browserSupportFlag =  new Boolean();
 
-function initialize() {
-  var myOptions = {
-    zoom: 6,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  };
-  var map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
+  <select class="form-control" id="zippick">
 
-  // Try W3C Geolocation (Preferred)
-  if(navigator.geolocation) {
-    browserSupportFlag = true;
-    navigator.geolocation.getCurrentPosition(function(position) {
-      initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-      map.setCenter(initialLocation);
+                                      <option>29455</option>
+                                      <option>29439</option>
+                                      <option>29412</option>
+                                      <option>29482</option>
+                                      <option>29401</option>
+                                      <option>29424</option>
+                                      <option>29403</option>
+                                      <option>29409</option>
+                                      <option>29407</option>
+                                      <option>29464</option>
+                                      <option>29485</option>
+                                      <option>29414</option>
+                                      <option>29466</option>
+                                      <option>29451</option>
+                                      <option>29429</option>
+                                      <option>29492</option>
+                                      <option>29410</option>
+                                      <option>29406</option>
+                            </select>
 
-    }, function() {
-      handleNoGeolocation(browserSupportFlag);
-    });
-  }
-  // Browser doesn't support Geolocation
-  else {
-    browserSupportFlag = false;
-    handleNoGeolocation(browserSupportFlag);
-  }
-
-  function handleNoGeolocation(errorFlag) {
-    if (errorFlag == true) {
-      alert("Geolocation service failed.");
-      initialLocation = newyork;
-    } else {
-      alert("Your browser doesn't support geolocation. We've placed you in Siberia.");
-      initialLocation = siberia;
-    }
-    map.setCenter(initialLocation);
-  }
-}
   

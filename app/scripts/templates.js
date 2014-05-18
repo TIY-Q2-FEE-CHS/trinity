@@ -6,9 +6,6 @@ Templates.postRant = [
           "<p>\"<%= rant.zip %>\"</p>",
         
           "<p>\"<%= rant.content %>\"</p>",
-          // "<p>\"<%= rant.lat %>\"</p>",
-          // "<p>\"<%= rant.lng %>\"</p>",
-         
         "</div>",
         "<% }); %>"
 ].join("\n");

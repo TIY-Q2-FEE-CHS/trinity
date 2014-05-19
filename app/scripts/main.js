@@ -76,9 +76,11 @@ var myRant = {
         }
       });
 
+      geolocateUser();
 
 
     },
+    
     removeRant: function(e){
       e.preventDefault();
       var $thisRant = $(this).closest(".rant")
